@@ -54,7 +54,7 @@ export default function TestPage() {
     };
     
     fetchGameData();
-  }, [gameArray]);
+  }, []);
 
  
   if (!gameArray.length || !gameKey) {
