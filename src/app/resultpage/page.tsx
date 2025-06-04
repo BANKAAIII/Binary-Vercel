@@ -1,16 +1,20 @@
 "use client";
 
+import { useAtomValue } from "jotai";
 import { Button } from "../components/Button";
 import AppNav from "../components/appNav";
 import { useRouter } from "next/navigation"; // Change to "next/navigation" if using App Router
+import { tokenAtom } from "../store/tokenAtom";
 
 export default function LandingPage() {
 
  
 
    const router = useRouter();
-  
-  
+     const token = useAtomValue(tokenAtom);
+          if(!token){
+            router.push("/signin");
+          }
   return (
     <div>
       

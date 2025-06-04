@@ -4,5 +4,6 @@ export default interface InputBoxProps {
     name: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     value: string;
+    className?:string;
   }
   

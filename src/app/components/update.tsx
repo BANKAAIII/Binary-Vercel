@@ -6,21 +6,15 @@ import {  useAtom } from "jotai";
 import { Button } from "./Button";
 import Inputbox from "./InputBox";
 import { Heading } from "./Heading";
-import BottomWarning from "./warningNav";
 import React, { useEffect } from 'react' 
 import { usernameAtom } from "../store/usernameAtom";
 import { emailAtom } from "../store/emailAtom";
 import { passwordAtom } from "../store/passwordAtom";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
+const UpdateComponent = () => {
 
-const SigninComponent = () => {
-
-  const router = useRouter();
-  useEffect(() => {
-    console.log("SigninComponent");
-  }, []);
+  useEffect(()=>{console.log("SigninComponent")},[])
   
   const [username,setUsername] = useAtom(usernameAtom);
   const [email,setEmail] = useAtom(emailAtom);
@@ -32,14 +26,26 @@ const SigninComponent = () => {
    
     <div className="relative flex flex-col bg-yellow-100/15 items-center justify-center text-center w-80 h-120 z-10 p-4 rounded-2xl overflow-hidden">
       
-        <Heading Heading={"Sign-Up"} SubHeading={"Enter Credentials to signin!"} />
+        <Heading Heading={"Update"} SubHeading={"Enter updated credentials"} />
         <Inputbox
         
         label={"Username"} /*The text insid the atcual input box*/
         name={"username"}
         type={"text"}
         value={username}
-        onChange={ (e)=>{setUsername(e.target.value)} }
+        onChange={ async(e)=>{
+          
+          try{
+            setUsername(e.target.value);
+            await axios.post(
+              "/api/auth/signup",
+              {username},
+              { headers: { "Content-Type": "application/json" } }
+            )
+          }catch{
+            return new Error("Backend call failed");
+          }
+        }}
         className={'text-white/30'}
         />
 
@@ -64,25 +70,11 @@ const SigninComponent = () => {
                 />        
         
 
-        <Button label="Signup" onClick={ async()=>{
-           try{
-         
-            await axios.post(
-              "/api/auth/signup",
-              {username, email, password}
-            );
-            router.push("/gamepage");
-             console.log("signed in");
-           
-          }catch{
-            return new Error("Backend call failed");
-          }
-        } } /> 
-        <BottomWarning label={"Already have an account ?"} link={"signin"} />
+        <Button label="update" onClick={()=>{"update"}} /> 
     </div>
  
   
   )
 }
 
-export default SigninComponent;
+export default UpdateComponent;

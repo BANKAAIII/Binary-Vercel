@@ -1,17 +1,19 @@
 "use client"
 
 import './globals.css';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
     
        <html lang="en">
+       
         <body>
-        <RecoilRoot>
+        <Provider>
           {children}
-          </RecoilRoot>
+          </Provider>
         </body>
+        
       </html>
     
     );

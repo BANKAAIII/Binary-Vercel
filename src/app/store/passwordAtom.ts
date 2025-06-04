@@ -1,9 +1,3 @@
-"use client"
-import { atom } from "recoil";
+import {atom} from "jotai";
 
-
-
-export const passwordAtom = atom<string> ({
-    key:"passwordAtom",
-    default: "" 
-})
+export const passwordAtom = atom("");

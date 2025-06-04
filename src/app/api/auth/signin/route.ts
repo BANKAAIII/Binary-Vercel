@@ -1,3 +1,5 @@
+
+
 import { NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/app/models/User";
@@ -5,9 +7,12 @@ import  connectDB  from "../../../lib/db";
 import { zodSigninSchema } from "@/app/lib/zodSchemas/zodSigninSchema";
 import generateToken from "@/app/utils/tokenGeneration";
 
+
 const jwt_token_secret = process.env.JWT_TOKEN_SECRET as string;
 
 export async function POST(req: NextRequest) {
+
+
     console.log("entered");
     await connectDB();
 
@@ -73,6 +78,8 @@ export async function POST(req: NextRequest) {
             headers: { "Content-Type": "application/json" }
         }
     )};
+
+    
 
     return new Response(JSON.stringify({
         success: true,

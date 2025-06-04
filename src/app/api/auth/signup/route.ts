@@ -5,6 +5,9 @@ import  connectDB  from "../../../lib/db";
 import generateToken from "@/app/utils/tokenGeneration";
 import { zodSignupSchema } from "@/app/lib/zodSchemas/zodSignupSchema";
 
+//Interfaces:
+import  tokenInterface  from "@/app/types/tokenInterface"
+
 const jwt_token_secret = process.env.JWT_TOKEN_SECRET as string;
 
 export async function POST(req: NextRequest) {
@@ -51,13 +54,17 @@ export async function POST(req: NextRequest) {
 
         console.log("New user successfully created!");
 
-        const payload = {
+        const payload : tokenInterface = {
             id: newUser._id,
             username,
             email,
-            createdAt: Date.now(),
+            iat: Math.floor(Date.now() / 1000),
+            exp: Math.floor(Date.now() / 1000) + 60 * 60, validity: "1h"
         };
 
+        console.log("Payload created successfully! :", payload);
+
+        
         const token = generateToken(payload, jwt_token_secret);
 
         if (!token) {

@@ -1,11 +1,3 @@
-"use client"
+import { atomWithStorage } from "jotai/utils";
 
-import { atom } from "recoil";
-
-
-
-export  const usernameAtom = atom<string>({
-    key: "usernameAtom",
-    default:""
-})
- 
+export const usernameAtom = atomWithStorage("username",'');

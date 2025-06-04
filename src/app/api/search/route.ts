@@ -1,41 +1,32 @@
-// Array Generation. 
-// Key Generation.
-
-
-function numbersGeneraiton():Array<number>{
-    const numbers =[];
-
-    for(let i=0; i<10;i++){
-        numbers[i] = Math.floor(Math.random()*10);
-
+export async function POST() {
+    function numbersGeneration(): number[] {
+      return Array.from({ length: 10 }, () => Math.floor(Math.random() * 10));
     }
-    return numbers;
-}
-
-function keyGenration(numbers:Array<number>):number{
-    const key = Math.floor(Math.random()* numbers.length);
-    return key;
-}
-
-export async function POST (){
-    let array =[];
-    array = numbersGeneraiton();
-    const key = keyGenration(array);
-
+  
+    function keyGeneration(numbers: number[]): number {
+      return Math.floor(Math.random() * numbers.length);
+    }
+  
+    const array = numbersGeneration();
+    const key = keyGeneration(array);
+  
     console.log(array);
-
-   
-
+  
     return new Response(
-        JSON.stringify({ success: true, message: "Generation successful",
-            array: array,
-            key: key
-         }),
-        {
-            status: 200,
-            headers: { "Content-Type": "application/json" }
-        }
+      JSON.stringify({
+        success: true,
+        message: "Generation successful",
+        array,
+        key,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Enable CORS if needed
+          "Access-Control-Allow-Methods": "POST",
+        },
+      }
     );
-
-    
-}
+  }
+  

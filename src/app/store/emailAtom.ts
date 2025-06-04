@@ -1,8 +1,3 @@
+import {atomWithStorage} from "jotai/utils";
 
-import { atom } from "recoil";
-
-
-export const emailAtom = atom<string> ({
-    key:"emailAtom",
-    default : "" 
-})
+export const emailAtom = atomWithStorage("email", "");
