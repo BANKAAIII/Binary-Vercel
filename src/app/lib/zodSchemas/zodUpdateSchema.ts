@@ -17,3 +17,5 @@ export const zodUpdateSchema = zod.object({
     .refine(value => value.endsWith('.com'), { message: "Only '.com' domains are allowed" })
     .optional()
 })  
+
+export type zodUpdateSchemaType = zod.infer<typeof zodUpdateSchema>;

@@ -12,3 +12,6 @@ export const zodSigninSchema = zod.object({
     .refine( value => /[0-1]/ .test(value) ,{ message: "Password must constain atleast ine number"} ),
 }
 )
+
+// basically ts definition of the schema
+export type zodSigninSchemaType = zod.infer<typeof zodSigninSchema>;

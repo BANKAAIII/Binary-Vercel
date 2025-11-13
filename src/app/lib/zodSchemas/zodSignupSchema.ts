@@ -15,3 +15,5 @@ export const zodSignupSchema = zod.object({
   email: zod.string().email("Invalid email format")
     .refine(value => value.endsWith('.com'), { message: "Only '.com' domains are allowed" })
 })  
+
+export type zodSignupSchemaType = zod.infer<typeof zodSignupSchema>;
